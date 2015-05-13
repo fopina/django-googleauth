@@ -5,6 +5,7 @@ from django.contrib.auth.models import User, Group
 IS_STAFF = getattr(settings, 'GOOGLEAUTH_IS_STAFF', False)
 GROUPS = getattr(settings, 'GOOGLEAUTH_GROUPS', tuple())
 APPS_DOMAIN = getattr(settings, 'GOOGLEAUTH_APPS_DOMAIN', None)
+USER_CREATE = getattr(settings, 'GOOGLEAUTH_USER_CREATE', True)
 
 
 class GoogleAuthBackend(object):
@@ -28,6 +29,9 @@ class GoogleAuthBackend(object):
                 user = User.objects.get(username=username, email=email)
 
         except User.DoesNotExist:
+
+            if not USER_CREATE:
+                return None
 
             user = User.objects.create(username=username, email=email)
             user.first_name = attributes.get('first_name') or ''
