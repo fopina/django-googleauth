@@ -96,6 +96,9 @@ Optional settings::
     # list of default group names to assign to new users
     GOOGLEAUTH_GROUPS = []
 
+    # create new user if it doesn't exist, default True
+    GOOGLEAUTH_USER_CREATE = True
+
 URL routes
 ~~~~~~~~~~
 
