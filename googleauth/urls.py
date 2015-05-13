@@ -1,4 +1,8 @@
-from django.conf.urls import *
+try:
+    from django.conf.urls import *
+except:
+    # django 1.3
+    from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
     url(r'^login/$', 'googleauth.views.login', name='googleauth_login'),
